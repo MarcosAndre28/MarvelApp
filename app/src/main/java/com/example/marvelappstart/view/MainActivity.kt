@@ -7,8 +7,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.marvelappstart.R
 import com.example.marvelappstart.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navHostFragment: NavHostFragment
@@ -28,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.apply {
             setupWithNavController(navController)
-            setOnNavigationItemReselectedListener {  }
         }
     }
 }
