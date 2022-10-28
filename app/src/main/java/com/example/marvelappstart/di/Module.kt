@@ -23,9 +23,10 @@ object Module {
 
     @Singleton
     @Provides
-    fun privideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
+
         return OkHttpClient().newBuilder()
             .addInterceptor { chain ->
                 val currentTimestamp = System.currentTimeMillis()
@@ -39,17 +40,15 @@ object Module {
                     )
                     .build()
 
-                val newrequest = chain.request()
+                val newRequest = chain.request()
                     .newBuilder()
                     .url(newUrl)
                     .build()
-                chain.proceed(newrequest)
-
+                chain.proceed(newRequest)
             }
             .addInterceptor(logging)
             .build()
     }
-
     @Singleton
     @Provides
     fun provideRetrofit(client: OkHttpClient): Retrofit {
